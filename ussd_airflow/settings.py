@@ -39,12 +39,14 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'corsheaders',
     # ******** LOCAL APPS *************#
     'ussd.apps.UssdConfig',
     # *********************************#
 ]
 
 MIDDLEWARE_CLASSES = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -129,7 +131,11 @@ SESSION_SERIALIZER = 'django.contrib.sessions.serializers.PickleSerializer'
 
 DEFAULT_USSD_SCREEN_JOURNEY = "./ussd/tests/sample_screen_definition/sample_customer_journey.yml"
 
+CORS_ORIGIN_ALLOW_ALL = True
+
 
 #Todo investigate why this variable is not working when using
 # override_settings
 CELERY_ALWAYS_EAGER = True
+
+DYNAMODB_TABLE = os.environ["DYNAMODB_TABLE"]
